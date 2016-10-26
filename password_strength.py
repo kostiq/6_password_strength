@@ -3,16 +3,21 @@ import argparse
 
 
 def get_password_strength(password):
-    if len(password) < 8:
+    good_len_pass = 21
+    weak_len_pass = 8
+    pass_lvl_up = 2
+    if len(password) < weak_len_pass:
         return 1
-    result = round((len(password) % 21)/7 + 1, 1)
+
+    pass_legth_and_strength = round(
+        (len(password) % good_legth_pass)/weak_len_pass, 1)
     if re.search('[A-Z]', password):
-        result += 2
+        pass_legth_and_strength += pass_lvl_up
     if re.search('[0-9]', password):
-        result += 2
+        pass_legth_and_strength += pass_lvl_up
     if re.search('[\W]', password):
-        result += 2
-    return result
+        pass_legth_and_strength += pass_lvl_up
+    return pass_legth_and_strength
 
 
 if __name__ == '__main__':
